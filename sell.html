@@ -607,6 +607,26 @@
             font-family: 'Font Awesome 5 Free';
             font-weight: 900;
         }
+
+        /* Add required field indicator styles */
+        label[for]::after {
+            content: "*";
+            color: #e32;
+            font-weight: bold;
+        }
+        
+        label[for="virtualTour"]::after {
+            content: " (Optional)";
+            color: #666;
+            font-weight: normal;
+        }
+        
+        .form-section-card h3::after {
+            content: " (* Required fields)";
+            font-size: 0.8em;
+            color: #666;
+            font-weight: normal;
+        }
     </style>
 </head>
 <body>
@@ -656,12 +676,12 @@
                     <h3>Basic Information</h3>
                     <div class="basic-info-section">
                         <div class="form-group">
-                            <label for="title">Property Title</label>
+                            <label for="title">Property Title </label>
                             <input type="text" id="title" required placeholder="e.g., Modern Apartment">
                         </div>
 
                         <div class="form-group">
-                            <label for="propertyType">Property Type</label>
+                            <label for="propertyType">Property Type </label>
                             <select id="propertyType" required>
                                 <option value="">Select Type</option>
                                 <option value="house">House</option>
@@ -674,7 +694,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="purpose">Purpose</label>
+                            <label for="purpose">Purpose </label>
                             <select id="purpose" required>
                                 <option value="">Select Purpose</option>
                                 <option value="sale">For Sale</option>
@@ -683,7 +703,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="description">Property Description</label>
+                            <label for="description">Property Description </label>
                             <textarea id="description" rows="4" required></textarea>
                         </div>
                     </div>
@@ -694,27 +714,27 @@
                     <h3>Property Details</h3>
                     <div class="property-details-section">
                         <div class="form-group">
-                            <label for="price">Price ($)</label>
+                            <label for="price">Price ($) </label>
                             <input type="number" id="price" required min="0">
                         </div>
 
                         <div class="form-group">
-                            <label for="sqft">Square Footage</label>
+                            <label for="sqft">Square Footage </label>
                             <input type="number" id="sqft" required min="0">
                         </div>
 
                         <div class="form-group">
-                            <label for="bedrooms">Bedrooms</label>
+                            <label for="bedrooms">Bedrooms </label>
                             <input type="number" id="bedrooms" required min="0">
                         </div>
 
                         <div class="form-group">
-                            <label for="bathrooms">Bathrooms</label>
+                            <label for="bathrooms">Bathrooms </label>
                             <input type="number" id="bathrooms" required min="0">
                         </div>
 
                         <div class="form-group">
-                            <label for="address">Address</label>
+                            <label for="address">Address </label>
                             <input type="text" id="address" required placeholder="Street address">
                         </div>
                     </div>
@@ -724,26 +744,26 @@
                 <div class="form-section-card">
                     <h3>Media</h3>
                     <div class="form-group">
-                        <label for="images">Property Images</label>
+                        <label for="images">Property Images </label>
                         <div class="file-input-container" onclick="document.getElementById('images').click()">
                             <label class="file-input-label">
                                 <i class="fas fa-cloud-upload-alt"></i>
                                 <p>Drag & drop your images here or click to browse</p>
                                 <p class="upload-btn">Choose Files</p>
-                                <input type="file" id="images" multiple accept="image/*" onchange="previewImages(event)">
+                                <input type="file" id="images" multiple accept="image/*" required onchange="previewImages(event)">
                             </label>
                             <div id="imagePreview" class="file-preview-grid"></div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="propertyVideo">Property Video</label>
+                        <label for="propertyVideo">Property Video </label>
                         <div class="file-input-container" onclick="document.getElementById('propertyVideo').click()">
                             <label class="file-input-label">
                                 <i class="fas fa-video"></i>
                                 <p>Upload a video walkthrough of your property</p>
                                 <p class="upload-btn">Upload Video</p>
-                                <input type="file" id="propertyVideo" accept="video/*" onchange="previewVideo(event)">
+                                <input type="file" id="propertyVideo" accept="video/*" required onchange="previewVideo(event)">
                             </label>
                             <div id="videoPreview" class="media-preview"></div>
                         </div>
@@ -760,6 +780,9 @@
                             </label>
                             <div id="tourPreview" class="media-preview"></div>
                         </div>
+                        <small style="display: block; margin-top: 8px; color: #666;">
+                            <i class="fas fa-info-circle"></i> You can create 360° panoramic images using <a href="https://planner5d.com/" target="_blank">Planner5D</a>
+                        </small>
                     </div>
                 </div>
 
@@ -784,6 +807,9 @@
                             <label class="checkbox-label">
                                 <input type="checkbox" name="amenities" value="fireplace"> Fireplace
                             </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="fireplace"> None
+                            </label>
                         </div>
                         
                         <div class="amenities-category">
@@ -802,6 +828,9 @@
                             </label>
                             <label class="checkbox-label">
                                 <input type="checkbox" name="amenities" value="yard"> Fenced Yard
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="fireplace"> None
                             </label>
                         </div>
                         
@@ -822,6 +851,9 @@
                             <label class="checkbox-label">
                                 <input type="checkbox" name="amenities" value="clubhouse"> Clubhouse
                             </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="fireplace"> None
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -830,17 +862,16 @@
                 <div class="form-section-card">
                     <h3>Contact Information</h3>
                     <div class="seller-info-section">
-                        <h3>Seller Contact Information</h3>
                         <div class="form-group">
-                            <label for="sellerName">Full Name</label>
+                            <label for="sellerName">Full Name </label>
                             <input type="text" id="sellerName" required placeholder="John Doe">
                         </div>
                         <div class="form-group">
-                            <label for="sellerPhone">Phone Number</label>
+                            <label for="sellerPhone">Phone Number </label>
                             <input type="tel" id="sellerPhone" required placeholder="(123) 456-7890">
                         </div>
                         <div class="form-group">
-                            <label for="sellerEmail">Email Address</label>
+                            <label for="sellerEmail">Email Address </label>
                             <input type="email" id="sellerEmail" required placeholder="your.email@example.com">
                         </div>
                     </div>
